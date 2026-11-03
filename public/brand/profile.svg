@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bff3ea"/>
+      <stop offset="0.55" stop-color="#e9fbf6"/>
+      <stop offset="1" stop-color="#fff6e3"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <linearGradient id="mount" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f7d5b"/>
+      <stop offset="1" stop-color="#1f5f45"/>
+    </linearGradient>
+    <linearGradient id="oreum" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4caf7d"/>
+      <stop offset="1" stop-color="#2f8a5d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 하늘 -->
+  <rect width="640" height="640" fill="url(#sky)"/>
+
+  <!-- 감귤빛 해 -->
+  <circle cx="452" cy="196" r="58" fill="#fb923c"/>
+  <circle cx="452" cy="196" r="58" fill="none" stroke="#fdba74" stroke-width="10" opacity=".6"/>
+  <path d="M452 138c8-14 22-20 34-16-6 12-20 19-34 16z" fill="#16a34a"/>
+
+  <!-- 한라산: 낮고 넓은 방패형 화산, 평평한 정상과 백록담 -->
+  <path d="M-20 470 C90 440 170 380 240 330 C262 314 280 306 300 304 L308 312 L332 312 L340 304 C360 306 378 314 400 330 C470 380 550 440 660 470 Z"
+        fill="url(#mount)"/>
+  <!-- 정상 잔설 -->
+  <path d="M240 330 C262 314 280 306 300 304 L308 312 L332 312 L340 304 C360 306 378 314 400 330 C384 334 372 328 362 334 C350 328 340 336 330 330 C320 336 310 328 300 334 C290 328 278 336 266 330 C256 334 248 332 240 330 Z"
+        fill="#f8fafc" opacity=".95"/>
+
+  <!-- 오름 -->
+  <path d="M40 462 C90 412 160 412 210 462 Z" fill="url(#oreum)"/>
+  <path d="M450 462 C490 424 545 424 585 462 Z" fill="url(#oreum)"/>
+
+  <!-- 바다 -->
+  <path d="M0 452 C100 437 200 467 320 452 C440 437 540 467 640 452 L640 640 L0 640 Z" fill="url(#sea)"/>
+  <path d="M60 500 C120 488 170 512 230 500" stroke="#99f6e4" stroke-width="8" fill="none" stroke-linecap="round" opacity=".7"/>
+  <path d="M380 528 C440 516 490 540 560 526" stroke="#99f6e4" stroke-width="8" fill="none" stroke-linecap="round" opacity=".7"/>
+
+  <!-- 숨결(바람) -->
+  <g fill="none" stroke="#ffffff" stroke-linecap="round">
+    <path d="M110 214 C170 180 220 246 290 206 C330 184 360 198 380 216" stroke-width="18" opacity=".95"/>
+    <path d="M120 286 C170 262 210 306 270 282" stroke-width="14" opacity=".85"/>
+    <path d="M400 280 C440 260 480 294 530 272" stroke-width="14" opacity=".85"/>
+    <path d="M380 216 C396 230 416 222 412 206 C408 192 390 194 392 206" stroke-width="10" opacity=".95"/>
+  </g>
+</svg>
