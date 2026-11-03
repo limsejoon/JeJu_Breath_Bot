@@ -13,6 +13,7 @@ import {
   type KakaoSkillRequest,
 } from "@/lib/kakao";
 import { hashUser, maskText } from "@/lib/mask";
+import { publicBaseUrl } from "@/lib/public-url";
 
 /** 오픈빌더 스킬 응답 제한(약 5초) 안에 답하도록 AI 호출은 3초로 자른다. 넘기면 확인 페이지에서 다시 시도한다. */
 const SKILL_EXTRACT_TIMEOUT_MS = 3000;
@@ -20,13 +21,6 @@ const SKILL_EXTRACT_TIMEOUT_MS = 3000;
 const MAP_REPLY = quickReply("오늘 지도");
 const HELP_REPLY = quickReply("사용법");
 
-function baseUrl(req: Request): string {
-  if (process.env.PUBLIC_BASE_URL) return process.env.PUBLIC_BASE_URL.replace(/\/$/, "");
-  const h = req.headers;
-  const host = h.get("x-forwarded-host") ?? h.get("host") ?? "localhost:3000";
-  const proto = h.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-  return `${proto}://${host}`;
-}
 
 const ok = (body: unknown) => Response.json(body);
 
@@ -39,7 +33,7 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as KakaoSkillRequest | null;
   const text = body?.userRequest?.utterance?.trim() ?? "";
   const userId = body ? kakaoUserId(body) : null;
-  const base = baseUrl(req);
+  const base = publicBaseUrl(req);
 
   // 오픈빌더는 200 + 규격 JSON이 아니면 사용자에게 오류를 보여주므로, 실패도 말풍선으로 답한다
   if (!userId) return ok(skillResponse([simpleText("사용자 정보를 확인할 수 없어요. 잠시 후 다시 보내 주세요.")]));

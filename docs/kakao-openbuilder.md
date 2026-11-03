@@ -25,21 +25,26 @@
 
 ## 설정 순서
 
-### 1. 서버 + 터널
+### 1. 서버 + ngrok 터널 (터미널 창 2개, 시연 끝까지 닫지 않기)
 ```bash
-npm run dev                                     # 터미널 1
-cloudflared tunnel --url http://localhost:3000  # 터미널 2 → https://xxxx.trycloudflare.com
+npm run dev      # 창 1: 웹 서버 (localhost:3000)
+npm run ngrok    # 창 2: 고정 주소 터널. 출력된 "오픈빌더 스킬 URL"을 그대로 사용
 ```
-`.env.local`에 아래 값을 넣고 서버를 다시 켭니다.
+
+`.env.local`에 필요한 값:
 ```
-PUBLIC_BASE_URL=https://xxxx.trycloudflare.com
+NGROK_DOMAIN=xxxx.ngrok-free.dev              # ngrok 대시보드에서 받은 고정 도메인
+PUBLIC_BASE_URL=https://xxxx.ngrok-free.dev   # 카드 버튼 링크 주소 (같은 도메인)
 KAKAO_SKILL_SECRET=(이미 생성된 값)
 ```
-> quick tunnel 주소는 cloudflared를 다시 켤 때마다 바뀝니다. 바뀌면 `PUBLIC_BASE_URL`과 오픈빌더의 스킬 URL을 둘 다 고쳐야 합니다.
+
+> **ngrok은 유료 플랜이어야 합니다.** 무료 버전은 브라우저 요청에 영어 경고 페이지를 끼워 넣어서, 카톡 인앱 브라우저에서 위치 확인 페이지의 CSS와 JS가 깨집니다.
+>
+> 유료 플랜이 없다면 비상용으로 `npm run tunnel`(cloudflared)을 하나 더 켜세요. 위치 확인 페이지만 경고가 없는 cloudflared 주소로 보내고, 그 주소는 `data/public-url.txt`에 자동 기록되어 `PUBLIC_BASE_URL`보다 우선합니다. 다시 ngrok만 쓰려면 이 파일을 지우세요.
 
 ### 2. 스킬 등록 (오픈빌더 → 스킬)
 - 이름: `제보 접수`
-- URL: `https://xxxx.trycloudflare.com/api/kakao/skill?key=KAKAO_SKILL_SECRET값`
+- URL: `npm run ngrok`이 출력한 주소 (`https://xxxx.ngrok-free.dev/api/kakao/skill?key=...`)
 - 저장
 
 ### 3. 폴백 블록 연결 (시나리오 → 기본 시나리오 → 폴백 블록)

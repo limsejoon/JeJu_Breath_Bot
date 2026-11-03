@@ -5,6 +5,7 @@ process.env.DB_PATH = ":memory:";
 process.env.USER_HASH_SALT = "test-salt";
 process.env.KAKAO_SKILL_SECRET = "s3cret";
 process.env.PUBLIC_BASE_URL = "https://bot.example.com";
+process.env.PUBLIC_URL_FILE = "/nonexistent/public-url.txt";
 delete process.env.ANTHROPIC_API_KEY; // AI 폴백 경로로 결정적으로 시험
 delete process.env.ANTHROPIC_AUTH_TOKEN;
 
